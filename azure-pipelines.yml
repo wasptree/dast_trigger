@@ -53,7 +53,7 @@ steps:
         if __name__ == "__main__":
             print("Looking for Dynamic Analysis Job: " + "$(SCAN_NAME)" )
             #lookup_query = "name=" + "$(SCAN_NAME)"
-            res = requests.get(api_base + "/analyses", auth=RequestsAuthPluginVeracodeHMAC(), params={ "name": "$(SCAN_NAME)" } )}, header=headers)
+            res = requests.get(api_base + "/analyses", auth=RequestsAuthPluginVeracodeHMAC(), params={ "name": "$(SCAN_NAME)" }, headers=headers)
             response = res.json()
             try:
                 job_id = response['_embedded']['analyses'][0]['analysis_id']
@@ -62,7 +62,7 @@ steps:
                 sys.exit(1)
 
             try:
-                res = requests.PUT(api_base + "/analyses/" + job_id + '?method=PATCH', json=data)
+                res = requests.PUT(api_base + "/analyses/" + job_id + '?method=PATCH', auth=RequestsAuthPluginVeracodeHMAC(), json=data, headers=headers)
                 if res.status_code == 204:
                     print("Scan Submitted Successfully: " + str(res.status_code) )
                 else:
