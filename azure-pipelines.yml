@@ -61,7 +61,7 @@ steps:
                 sys.exit(1)
 
             try:
-                res = requests.PUT(api_base + "/analyses/' + job_id + '?method=PATCH', json=data)
+                res = requests.PUT(api_base + "/analyses/" + job_id + '?method=PATCH', json=data)
                 if res.status_code == 204:
                     print("Scan Submitted Successfully: " + str(res.status_code) )
                 else:
