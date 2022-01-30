@@ -52,8 +52,8 @@ steps:
         }
         if __name__ == "__main__":
             print("Looking for Dynamic Analysis Job: " + "$(SCAN_NAME)" )
-            lookup_query = "name=" + "$(SCAN_NAME)"
-            res = requests.get(api_base + "/analyses", auth=RequestsAuthPluginVeracodeHMAC(), query=(lookup_query), header=headers)
+            #lookup_query = "name=" + "$(SCAN_NAME)"
+            res = requests.get(api_base + "/analyses", auth=RequestsAuthPluginVeracodeHMAC(), params={ "name": "$(SCAN_NAME)" } )}, header=headers)
             response = res.json()
             try:
                 job_id = response['_embedded']['analyses'][0]['analysis_id']
